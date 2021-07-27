@@ -15,7 +15,12 @@ class CreateSaleProductsTable extends Migration
     {
         Schema::create('sale_products', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->foreignId('sale_id');
+            $table->foreignId('product_id');
+            $table->integer('quantity');
+            $table->decimal('price');
+            $table->decimal('total');
+            $table->foreignId('characteristic_id');
         });
     }
 

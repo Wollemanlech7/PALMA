@@ -1,6 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SaleController;
+use App\Http\Controllers\MenuController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CartController;
+
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,14 +20,27 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
-});
+});*/
 
 Route::get('/cart', function () {
     return view('cart');
 });
 
-Route::get('/product/{productId}', function() {
-    return view('product');
+Route::get('/product/{productId}', [ProductController::class, 'show']);
+   
+
+Route::get('/prueba', [SaleController::class, 'index']);
+
+Route::get('/', [MenuController::class, 'menuProducts']);
+
+
+
+
+Route::group(['prefix' => "carrito"], function() {
+    Route::get('/', [CartController::class, 'index'])->name('cartIndex');
+    Route::get('/agregar/{articulo}', [CartController::class, 'addItem']);
+    Route::get('/view', [CartController::class, 'viewItem']);
 });
+

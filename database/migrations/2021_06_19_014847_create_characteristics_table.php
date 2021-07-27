@@ -15,7 +15,9 @@ class CreateCharacteristicsTable extends Migration
     {
         Schema::create('characteristics', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('characteristics');
+            
+            $table->foreignId('product_id');
         });
     }
 
