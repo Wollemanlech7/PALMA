@@ -2,10 +2,10 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-    <script src="https://kit.fontawesome.com/40245cd335.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="{{ asset('css/bulma.css') }}">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://kit.fontawesome.com/40245cd335.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{{ asset('css/bulma.css') }}">
     <title>Palma | @yield('title')</title>
 
     @section('css') 
@@ -109,6 +109,7 @@
 
 
     <script src="{{ asset('js/axios.js') }}"></script>
+    <script src="{{ asset('js/vue.js') }}"></script>
     @section('js')
     @show
 </body>
