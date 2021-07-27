@@ -1,8 +1,23 @@
-@extends('layout.main')
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
-@section('title', 'Index')
+<head>
+    <script src="https://kit.fontawesome.com/40245cd335.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{{ asset('css/bulma.css') }}">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Palma | @yield('title')</title>
 
-@section('content')
+    @section('css') 
+    @show
+</head>
+
+<body class="bg-white">
+    @include('layout.navbar')
+
+    @section('content')
+    @show
+
     <div class="container is-fluid">
         <div class="columns is-mobile">
             <div class="column is-12-mobile is-3-desktop ">
@@ -91,27 +106,11 @@
             @endforeach
         </div>
     </div>
-@endsection
 
-@section('js')
-<script>
-    function addToCart(articulo) {
-         // Make a request for a user with a given ID
-     axios.get(`/carrito/agregar/${articulo}`)
-     .then( (response) => {
-         viewCart(response.data.items)
-     })
-     .catch(function (error) {
-         // handle error
-         console.log(error);
-     });
-    
 
-     }
+    <script src="{{ asset('js/axios.js') }}"></script>
+    @section('js')
+    @show
+</body>
 
-     function viewCart(items) {
-         var count = items.length;
-         document.getElementById('cart-item').innerHTML = count
-     }
-</script>
-@endsection
+</html>
