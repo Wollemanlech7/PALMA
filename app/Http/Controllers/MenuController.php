@@ -10,18 +10,17 @@ use App\Models\Category;
 class MenuController extends Controller
 {
     public function menuProducts() {
-        $objProducts = Product::where('quantity', '>', 0)->get();
-
-        return view('index', [
-            'products' =>$objProducts,
-
-        ]);
+        return view('index');
     }
 
     public function getCategories() {
         $objCategories = Category::all();
+        $objProducts = Product::where('quantity', '>', 0)->get();
 
-        return response()->json(['categories' =>$objCategories]);
+        return response()->json([
+            'products' =>$objProducts,
+            'categories' =>$objCategories
+        ]);
     }
 }
 

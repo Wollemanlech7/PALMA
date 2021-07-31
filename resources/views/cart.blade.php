@@ -10,6 +10,7 @@
       </div>
   </div>
 
+  @if (isset($produc))
   @foreach ($items as $product)
   <div class="columns is-mobile is-vcentered">
       <div class="column is-3-mobile">
@@ -37,7 +38,10 @@
   
       </div>
   </div>
-  @endforeach
+  @endforeach    
+  @endif
+  
+
   <hr style="border-top: 3px dashed black;">
   <div class="columns   is-mobile is-vcentered  is-size-2 pt-4">
       <div class="column is-8-mobile pl-5">
