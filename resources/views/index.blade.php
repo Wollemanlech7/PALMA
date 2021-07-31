@@ -1,9 +1,9 @@
 @extends('layout.main')
 
-@section('title', 'Index')
+@section('title', 'Inicio')
 
 @section('content')
-    <div class="container is-fluid">
+    <div id="app-index" class="container is-fluid">
         <div class="columns is-mobile">
             <div class="column is-12-mobile is-3-desktop ">
                 <h1 class="title is-1 text-black">ESCOGE TUS SNACKS FAVORITOS</h1>
@@ -27,30 +27,20 @@
             </div>
         </div>
         <div style="overflow-x: scroll" class="column is-flex-direction-row is-flex">
-            @foreach ($categories as $category)
-                <div class="column is-7-mobile mb-0 ">
-                    <div class="card ">
-                        <div class="card-content ">
-                            <div class="columns is-mobile is-vcentered">
-                                <div class="column is-4-mobile mb-0">
-                                    <figure class="img is-48x48 mb-0">
-                                        <img class="mb-0" src="{{ asset('img/sabritas-limon.jpg') }}" alt="img">
-                                    </figure>
-                                </div>
-                                <div class="column is-8-mobile ">
-                                    <p class="title is-4 text-">{{ $category->category }}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
+            <v-categories 
+                v-for="category in categories"
+                :key="category.id"
+                img="img/sabritas-limon.jpg"
+                :category="category.category"
+                
+            ></v-categories>
+        
 
         </div>
 
 
         <div style="display:flex; flex-wrap:wrap " class="columns is-mobile ">
-            @foreach ($products as $product)
+            {{-- @foreach ($products as $product)
                 <div class="column is-half">
                     <div style="border-radius: 20px !important" class="card ">
                         <a href="{{ asset('product/' . $product->id) }}">
@@ -88,12 +78,13 @@
                         </div>
                     </div>
                 </div>
-            @endforeach
+            @endforeach --}}
         </div>
     </div>
 @endsection
 
 @section('js')
+<script src="{{asset('js/vue-index.js')}}"></script>
 <script>
     function addToCart(articulo) {
          // Make a request for a user with a given ID
@@ -114,4 +105,7 @@
          document.getElementById('cart-item').innerHTML = count
      }
 </script>
+
+
+
 @endsection

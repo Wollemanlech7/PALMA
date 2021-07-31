@@ -6,16 +6,23 @@ use Illuminate\Http\Request;
 use App\Models\Product; 
 use App\Models\Category;
 
+
 class MenuController extends Controller
 {
     public function menuProducts() {
         $objProducts = Product::where('quantity', '>', 0)->get();
-        $objCategories = Category::all();
 
         return view('index', [
             'products' =>$objProducts,
-            'categories' =>$objCategories
 
         ]);
     }
+
+    public function getCategories() {
+        $objCategories = Category::all();
+
+        return response()->json(['categories' =>$objCategories]);
+    }
 }
+
+

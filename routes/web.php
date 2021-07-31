@@ -36,6 +36,9 @@ Route::get('/prueba', [SaleController::class, 'index']);
 Route::get('/', [MenuController::class, 'menuProducts']);
 
 
+Route::group(['prefix' => "index"], function() {
+    Route::get('/get-categories', [MenuController::class, 'getCategories']);
+});
 
 
 Route::group(['prefix' => "carrito"], function() {
