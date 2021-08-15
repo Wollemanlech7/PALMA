@@ -1,33 +1,4 @@
-Vue.component('v-categories', {
-    props: [
-        'id',
-        'img',
-        'category'
 
-    ],
-    template: `
-        <div class="column is-7-mobile mb-0 ">
-            <a :href="id">
-                <div class="card ">
-                    <div class="card-content ">
-                        <div class="columns is-mobile is-vcentered">
-                            <div class="column is-4-mobile mb-0">
-                                <figure class="img is-48x48 mb-0">
-                                    <img class="mb-0" :src="img" alt="img">
-                                </figure>
-                            </div>
-                            <div class="column is-8-mobile ">
-                                <p class="title is-4 text-">{{ category }}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </a>
-        </div>
-    `
-
-
-})
 
 Vue.component('v-product', {
     props: [
@@ -80,9 +51,9 @@ Vue.component('v-product', {
 
 })
 
-var indexApp = new Vue({
+var categoriesApp = new Vue({
     delimiters: ['${', '}'],
-    el: '#app-index',
+    el: '#app-category',
     data: {
         categories: [],
         products: [],
@@ -90,15 +61,15 @@ var indexApp = new Vue({
 
     },
     mounted: function () {
-        this.getCategories()
+        this.getItemsCategory()
         
     },
     methods: {
-        getCategories() {
+        getItemsCategory() {
             _that = this
-            axios.get(`index/get-categories`)
+            var id= document.getElementById('category').value
+            axios.get('/categories/get-items', {params:{id:id}})
                 .then((response) => {
-                    _that.categories = response.data.categories
                     _that.products = response.data.products
                 })
                 .catch(function (error) {
@@ -106,34 +77,34 @@ var indexApp = new Vue({
                 });
         },
 
-        addToCart(articulo) {
-            var _that=this
+        // addToCart(articulo) {
+        //     var _that=this
 
-            axios.get(`/carrito/agregar/${articulo}`)
-                .then( (response) => {
-                    _that.viewCart(response.data.items)
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
+        //     axios.get(`/carrito/agregar/${articulo}`)
+        //         .then( (response) => {
+        //             _that.viewCart(response.data.items)
+        //         })
+        //         .catch(function (error) {
+        //             console.log(error);
+        //         });
         
-        },
+        // },
 
-        getCart() {
-            var _that=this
-            axios.get(`/carrito/obtener`)
-                .then( (response) => {
-                    _that.cart=response.data.items
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-        },
+        // getCart() {
+        //     var _that=this
+        //     axios.get(`/carrito/obtener`)
+        //         .then( (response) => {
+        //             _that.cart=response.data.items
+        //         })
+        //         .catch(function (error) {
+        //             console.log(error);
+        //         });
+        // },
 
-        viewCart(items) {
-            var count = items.length;
-            document.getElementById('cart-item').innerHTML = count
-        },
+        // viewCart(items) {
+        //     var count = items.length;
+        //     document.getElementById('cart-item').innerHTML = count
+        // },
         
     }
 })

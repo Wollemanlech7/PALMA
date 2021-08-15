@@ -5,6 +5,8 @@ use App\Http\Controllers\SaleController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CategoryController;
+
 
 
 
@@ -44,6 +46,12 @@ Route::group(['prefix' => "index"], function() {
 Route::group(['prefix' => "carrito"], function() {
     Route::get('/', [CartController::class, 'index'])->name('cartIndex');
     Route::get('/agregar/{articulo}', [CartController::class, 'addItem']);
-    Route::get('/view', [CartController::class, 'viewItem']);
+    Route::get('/get-cart', [CartController::class, 'get'])->name('getCart');
+    Route::get('/delete-item/{itemIndex}', [CartController::class, 'deleteItemCart']);
+
 });
+
+Route::get("/categories/{idCategory}", [CategoryController::class, 'index']);
+Route::get("/categories/get-items", [CategoryController::class, 'getItemsCategory']);
+
 

@@ -30,6 +30,7 @@
             <v-categories 
                 v-for="category in categories"
                 :key="category.id"
+                :id="'categories/'+category.id"
                 img="img/sabritas-limon.jpg"
                 :category="category.category"
                 
@@ -45,6 +46,7 @@
                 :name="product.name"
                 :description="product.description"
                 :cost="product.cost"
+                @action="addToCart(product.id)"
             ></v-product>
         </div>
     </div>
@@ -52,27 +54,4 @@
 
 @section('js')
 <script src="{{asset('js/vue-index.js')}}"></script>
-<script>
-    function addToCart(articulo) {
-         // Make a request for a user with a given ID
-     axios.get(`/carrito/agregar/${articulo}`)
-     .then( (response) => {
-         viewCart(response.data.items)
-     })
-     .catch(function (error) {
-         // handle error
-         console.log(error);
-     });
-    
-
-     }
-
-     function viewCart(items) {
-         var count = items.length;
-         document.getElementById('cart-item').innerHTML = count
-     }
-</script>
-
-
-
 @endsection
